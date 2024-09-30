@@ -1,6 +1,6 @@
 {
   "name": "react-transition-preset",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Lightweight, zero-dependency transition component with common preset transition",
   "type": "module",
   "keywords": [
@@ -27,7 +27,8 @@
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
-    }
+    },
+    "./*": "./*"
   },
   "sideEffects": false,
   "scripts": {
