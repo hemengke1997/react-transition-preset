@@ -1,0 +1,79 @@
+{
+  "name": "react-transition-preset",
+  "version": "0.0.0",
+  "description": "Lightweight, zero-dependency transition component with common preset transition",
+  "type": "module",
+  "keywords": [
+    "react",
+    "react-transition",
+    "transition",
+    "animation",
+    "preset"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemengke1997/react-transition-preset.git"
+  },
+  "author": "hemengke <https://github.com/hemengke1997>",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "build:pages": "npm run build && cd playground && npm run build",
+    "lint-staged": "tsc --noEmit && lint-staged",
+    "commitlint": "commitlint -e",
+    "prepare": "simple-git-hooks",
+    "lint": "tsc --noEmit && eslint .",
+    "up": "taze -I -w -r",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "bump": "bumpp package.json -c --no-push -t --all -x \"npm run changelog\""
+  },
+  "peerDependencies": {
+    "react": ">=17.0.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@minko-fe/commitlint-config": "^2.1.2",
+    "@minko-fe/eslint-config": "^4.0.2",
+    "@minko-fe/prettier-config": "^2.2.3",
+    "@minko-fe/tsconfig": "^2.1.1",
+    "bumpp": "^9.6.1",
+    "conventional-changelog-cli": "^5.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.11.1",
+    "lint-staged": "^15.2.10",
+    "npm-run-all": "^4.1.5",
+    "simple-git-hooks": "^2.11.1",
+    "taze": "^0.17.2",
+    "tsup": "^8.3.0",
+    "tsup-plugin-bundleless": "^1.1.1",
+    "typescript": "^5.6.2"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npm run commitlint",
+    "pre-commit": "npm run lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  },
+  "commitlint": {
+    "extends": [
+      "@minko-fe/commitlint-config"
+    ]
+  },
+  "prettier": "@minko-fe/prettier-config"
+}
