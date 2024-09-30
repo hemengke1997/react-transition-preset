@@ -34,6 +34,20 @@ function Demo({ opened }: { opened: boolean }) {
 }
 ```
 
+如果你的组件有样式属性，你可以使用渲染函数
+
+```tsx
+import { Transition } from 'react-transition-preset'
+
+function Demo({ opened }: { opened: boolean }) {
+  return (
+    <Transition mounted={opened}>
+      {(styles) => <div style={styles}>your component</div>}
+    </Transition>
+  )
+}
+```
+
 ## API
 
 ```ts
@@ -57,7 +71,7 @@ interface TransitionProps {
   timingFunction?: string
 
   /** 带有过渡样式参数的渲染函数 */
-  children: (styles: React.CSSProperties) => JSX.Element
+  children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
 
   /** 当退出过渡结束时调用 */
   onExited?: () => void

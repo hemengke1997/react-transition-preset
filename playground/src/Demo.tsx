@@ -14,14 +14,9 @@ export default function Demo(props: Props) {
       <Button onClick={() => setOpen((t) => !t)}>{transition}</Button>
       <div className={'w-40 h-40 relative'}>
         <Transition transition={transition} mounted={open}>
-          {(styles) => (
-            <div
-              style={styles}
-              className={'w-full h-full absolute bg-blue-400 rounded-lg flex justify-center items-center text-white'}
-            >
-              {transition}
-            </div>
-          )}
+          <div className={'w-full h-full absolute bg-blue-400 rounded-lg flex justify-center items-center text-white'}>
+            {transition}
+          </div>
         </Transition>
       </div>
     </div>

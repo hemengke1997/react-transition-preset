@@ -1,3 +1,4 @@
+import { cloneElement, type CSSProperties } from 'react'
 import { getTransitionStyles } from './get-transition-styles/get-transition-styles'
 import { type PresetTransition } from './transitions'
 import { useTransition } from './use-transition'
@@ -22,7 +23,7 @@ export interface TransitionProps {
   timingFunction?: string
 
   /** Render function with transition styles argument */
-  children: (styles: React.CSSProperties) => JSX.Element
+  children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
 
   /** Called when exit transition ends */
   onExited?: () => void
@@ -73,17 +74,24 @@ export function Transition({
     exitDelay,
   })
 
+  const createChildren = (style: CSSProperties) => {
+    if (typeof children === 'function') {
+      return children(style)
+    }
+    return cloneElement(children, { style }) as JSX.Element
+  }
+
   if (transitionDuration === 0) {
-    return mounted ? <>{children({})}</> : keepMounted ? children({ display: 'none' }) : null
+    return mounted ? <>{createChildren({})}</> : keepMounted ? createChildren({ display: 'none' }) : null
   }
 
   return transitionStatus === 'exited' ? (
     keepMounted ? (
-      children({ display: 'none' })
+      createChildren({ display: 'none' })
     ) : null
   ) : (
     <>
-      {children(
+      {createChildren(
         getTransitionStyles({
           transition,
           duration: transitionDuration,

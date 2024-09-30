@@ -27,6 +27,18 @@ function Demo({ opened }: { opened: boolean }) {
       duration={400}
       timingFunction='ease'
     >
+      <div>your component</div>
+    </Transition>
+  )
+}
+```
+
+If your component has style props, you can use render function
+
+```tsx
+function Demo({ opened }: { opened: boolean }) {
+  return (
+    <Transition mounted={opened}>
       {(styles) => <div style={styles}>your component</div>}
     </Transition>
   )
@@ -56,7 +68,7 @@ interface TransitionProps {
   timingFunction?: string
 
   /** Render function with transition styles argument */
-  children: (styles: React.CSSProperties) => JSX.Element
+  children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
 
   /** Called when exit transition ends */
   onExited?: () => void

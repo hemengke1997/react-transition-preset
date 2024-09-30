@@ -48,25 +48,25 @@ export const transitions: Record<PresetTransitionName, PresetTransitionStyles> =
 
   'fade-up': {
     in: { opacity: 1, transform: 'translateY(0)' },
-    out: { opacity: 0, transform: `translateY(var(--transition-preset-fade-up, 30px))` },
+    out: { opacity: 0, transform: `translateY(var(--transition-preset-fade-up, -30px))` },
     transitionProperty: 'opacity, transform',
   },
 
   'fade-down': {
     in: { opacity: 1, transform: 'translateY(0)' },
-    out: { opacity: 0, transform: `translateY(var(--transtion-preset-fade-down, -30px)` },
+    out: { opacity: 0, transform: `translateY(var(--transtion-preset-fade-down, 30px)` },
     transitionProperty: 'opacity, transform',
   },
 
   'fade-left': {
     in: { opacity: 1, transform: 'translateX(0)' },
-    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-left, 30px))` },
+    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-left, -30px))` },
     transitionProperty: 'opacity, transform',
   },
 
   'fade-right': {
     in: { opacity: 1, transform: 'translateX(0)' },
-    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-right, -30px)` },
+    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-right, 30px)` },
     transitionProperty: 'opacity, transform',
   },
 
@@ -133,28 +133,28 @@ export const transitions: Record<PresetTransitionName, PresetTransitionStyles> =
 
   'slide-down': {
     in: { opacity: 1, transform: 'translateY(0)' },
-    out: { opacity: 0, transform: 'translateY(-100%)' },
+    out: { opacity: 0, transform: 'translateY(100%)' },
     common: { transformOrigin: 'top' },
     transitionProperty: 'transform, opacity',
   },
 
   'slide-up': {
     in: { opacity: 1, transform: 'translateY(0)' },
-    out: { opacity: 0, transform: 'translateY(100%)' },
+    out: { opacity: 0, transform: 'translateY(-100%)' },
     common: { transformOrigin: 'bottom' },
     transitionProperty: 'transform, opacity',
   },
 
   'slide-left': {
     in: { opacity: 1, transform: 'translateX(0)' },
-    out: { opacity: 0, transform: 'translateX(100%)' },
+    out: { opacity: 0, transform: 'translateX(-100%)' },
     common: { transformOrigin: 'left' },
     transitionProperty: 'transform, opacity',
   },
 
   'slide-right': {
     in: { opacity: 1, transform: 'translateX(0)' },
-    out: { opacity: 0, transform: 'translateX(-100%)' },
+    out: { opacity: 0, transform: 'translateX(100%)' },
     common: { transformOrigin: 'right' },
     transitionProperty: 'transform, opacity',
   },
