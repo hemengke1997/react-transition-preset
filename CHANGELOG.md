@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/hemengke1997/react-transition-preset/compare/v1.0.1...v1.1.0) (2024-09-30)
+
+
+### Features
+
+* support jsx children element ([b856503](https://github.com/hemengke1997/react-transition-preset/commit/b856503dd024d89242eb96387e233e210a3e573c))
+
+
+
 ## [1.0.1](https://github.com/hemengke1997/react-transition-preset/compare/v1.0.0...v1.0.1) (2024-09-30)
 
 

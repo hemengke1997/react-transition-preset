@@ -1,6 +1,6 @@
 {
   "name": "react-transition-preset",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Lightweight, zero-dependency transition component with common preset transition",
   "type": "module",
   "keywords": [
