@@ -60,13 +60,13 @@ export const transitions: Record<PresetTransitionName, PresetTransitionStyles> =
 
   'fade-left': {
     in: { opacity: 1, transform: 'translateX(0)' },
-    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-left, -30px))` },
+    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-left, 30px))` },
     transitionProperty: 'opacity, transform',
   },
 
   'fade-right': {
     in: { opacity: 1, transform: 'translateX(0)' },
-    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-right, 30px)` },
+    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-right, -30px)` },
     transitionProperty: 'opacity, transform',
   },
 
