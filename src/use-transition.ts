@@ -34,7 +34,12 @@ export function useTransition({
   exitDelay,
 }: UseTransition) {
   const [transitionDuration, setTransitionDuration] = useState(reduceMotion ? 0 : duration)
-  const [transitionStatus, setStatus] = useState<TransitionStatus>(mounted ? 'entered' : 'exited')
+  const [transitionStatus, setStatus] = useState<TransitionStatus>(() => {
+    if (initial && mounted) {
+      return 'exited'
+    }
+    return mounted ? 'entered' : 'exited'
+  })
   const transitionTimeoutRef = useRef<number>(-1)
   const delayTimeoutRef = useRef<number>(-1)
   const rafRef = useRef(-1)
