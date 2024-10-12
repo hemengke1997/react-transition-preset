@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/hemengke1997/react-transition-preset/compare/v1.1.0...v1.2.0) (2024-10-12)
+
+
+### Features
+
+* transition on initial ([432f742](https://github.com/hemengke1997/react-transition-preset/commit/432f742ba0e5b508d76f7fbae9edabfc32045639))
+
+
+
 # [1.1.0](https://github.com/hemengke1997/react-transition-preset/compare/v1.0.1...v1.1.0) (2024-09-30)
 
 
