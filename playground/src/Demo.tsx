@@ -10,11 +10,11 @@ export default function Demo(props: Props) {
   const [open, setOpen] = useState(true)
 
   return (
-    <div className={'flex items-center w-80 justify-between'}>
+    <div className={'flex w-80 items-center justify-between'}>
       <Button onClick={() => setOpen((t) => !t)}>{transition}</Button>
-      <div className={'w-40 h-40 relative'}>
+      <div className={'relative h-40 w-40'}>
         <Transition transition={transition} mounted={open}>
-          <div className={'w-full h-full absolute bg-blue-400 rounded-lg flex justify-center items-center text-white'}>
+          <div className={'absolute flex h-full w-full items-center justify-center rounded-lg bg-blue-400 text-white'}>
             {transition}
           </div>
         </Transition>

@@ -36,6 +36,8 @@ function Demo({ opened }: { opened: boolean }) {
 If your component has style props, you can use render function
 
 ```tsx
+import { Transition } from 'react-transition-preset'
+
 function Demo({ opened }: { opened: boolean }) {
   return (
     <Transition mounted={opened}>

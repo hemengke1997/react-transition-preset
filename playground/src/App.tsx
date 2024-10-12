@@ -9,7 +9,7 @@ function App() {
   ))
 
   return (
-    <div className={'w-screen flex justify-center items-center p-10'}>
+    <div className={'flex w-screen items-center justify-center p-10'}>
       <div className={'flex flex-col gap-2'}>{demos}</div>
     </div>
   )
