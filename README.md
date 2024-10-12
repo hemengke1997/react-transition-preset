@@ -51,12 +51,15 @@ function Demo({ opened }: { opened: boolean }) {
 interface TransitionProps {
   /** Determines whether component should be mounted to the DOM */
   mounted: boolean
-  
+
   /** If set element will not be unmounted from the DOM when it is hidden, `display: none` styles will be applied instead */
   keepMounted?: boolean
 
   /** Transition name or object */
   transition?: PresetTransition
+
+  /** Determines whether to set the transition when initializing */
+  initial?: boolean
 
   /** Transition duration in ms, `250` by default */
   duration?: number

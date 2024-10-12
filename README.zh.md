@@ -61,6 +61,9 @@ interface TransitionProps {
   /** 过渡名称或对象 */
   transition?: PresetTransition
 
+  /** 在初始化时设置过渡 */
+  initial?: boolean
+
   /** 过渡持续时间（毫秒），默认 `250` */
   duration?: number
 

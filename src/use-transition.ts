@@ -6,6 +6,7 @@ export type TransitionStatus = 'entered' | 'exited' | 'entering' | 'exiting' | '
 
 export interface UseTransition {
   duration: number
+  initial: boolean
   exitDuration: number
   timingFunction: string
   mounted: boolean
@@ -20,6 +21,7 @@ export interface UseTransition {
 
 export function useTransition({
   duration,
+  initial,
   exitDuration,
   timingFunction,
   mounted,
@@ -87,9 +89,13 @@ export function useTransition({
     )
   }
 
-  useDidUpdate(() => {
-    handleTransitionWithDelay(mounted)
-  }, [mounted])
+  useDidUpdate(
+    () => {
+      handleTransitionWithDelay(mounted)
+    },
+    [mounted],
+    initial,
+  )
 
   useEffect(
     () => () => {

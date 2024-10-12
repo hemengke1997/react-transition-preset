@@ -13,6 +13,9 @@ export interface TransitionProps {
   /** Transition name or object */
   transition?: PresetTransition
 
+  /** Determines whether to set the transition when initializing */
+  initial?: boolean
+
   /** Transition duration in ms, `250` by default */
   duration?: number
 
@@ -49,6 +52,7 @@ export type TransitionOverride = Partial<Omit<TransitionProps, 'mounted'>>
 export function Transition({
   keepMounted,
   transition = 'fade',
+  initial = false,
   duration = 250,
   exitDuration = duration,
   mounted,
@@ -63,6 +67,7 @@ export function Transition({
 }: TransitionProps) {
   const { transitionDuration, transitionStatus, transitionTimingFunction } = useTransition({
     mounted,
+    initial,
     exitDuration,
     duration,
     timingFunction,
