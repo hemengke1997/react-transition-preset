@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/hemengke1997/react-transition-preset/compare/v1.2.0...v1.2.1) (2024-10-12)
+
+
+### Bug Fixes
+
+* initial not working in rare condition ([112e6fa](https://github.com/hemengke1997/react-transition-preset/commit/112e6fa799ab29a93e9bbdacc94c369c363af969))
+
+
+
 # [1.2.0](https://github.com/hemengke1997/react-transition-preset/compare/v1.1.0...v1.2.0) (2024-10-12)
 
 
