@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
-import ReactDOM from 'react-dom'
+import { useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { useDidUpdate } from './hooks/use-did-update'
+import { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect'
 
 export type TransitionStatus = 'entered' | 'exited' | 'entering' | 'exiting' | 'pre-exiting' | 'pre-entering'
 
@@ -36,7 +37,7 @@ export function useTransition({
   const [transitionDuration, setTransitionDuration] = useState(reduceMotion ? 0 : duration)
   const [transitionStatus, setStatus] = useState<TransitionStatus>(() => {
     if (initial && mounted) {
-      return 'exited'
+      return 'pre-entering'
     }
     return mounted ? 'entered' : 'exited'
   })
@@ -60,7 +61,7 @@ export function useTransition({
     } else {
       // Make sure new status won't be set within the same frame as this would disrupt animation
       rafRef.current = requestAnimationFrame(() => {
-        ReactDOM.flushSync(() => {
+        flushSync(() => {
           setStatus(shouldMount ? 'pre-entering' : 'pre-exiting')
         })
 
@@ -102,7 +103,7 @@ export function useTransition({
     initial,
   )
 
-  useEffect(
+  useIsomorphicLayoutEffect(
     () => () => {
       window.clearTimeout(transitionTimeoutRef.current)
       cancelAnimationFrame(rafRef.current)

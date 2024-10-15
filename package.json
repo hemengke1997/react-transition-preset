@@ -8,7 +8,8 @@
     "react-transition",
     "transition",
     "animation",
-    "preset"
+    "simple-transition",
+    "transition-preset"
   ],
   "license": "MIT",
   "repository": {

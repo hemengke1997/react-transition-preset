@@ -47,8 +47,6 @@ export interface TransitionProps {
   exitDelay?: number
 }
 
-export type TransitionOverride = Partial<Omit<TransitionProps, 'mounted'>>
-
 export function Transition({
   keepMounted,
   transition = 'fade',

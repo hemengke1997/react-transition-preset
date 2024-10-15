@@ -1,16 +1,17 @@
-import { type DependencyList, type EffectCallback, useEffect, useRef } from 'react'
+import { type DependencyList, type EffectCallback, useRef } from 'react'
+import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 
 export function useDidUpdate(fn: EffectCallback, dependencies?: DependencyList, initial = false) {
   const mounted = useRef(initial)
 
-  useEffect(
+  useIsomorphicLayoutEffect(
     () => () => {
       mounted.current = initial
     },
     [],
   )
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (mounted.current) {
       return fn()
     }
