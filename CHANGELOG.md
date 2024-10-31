@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/hemengke1997/react-transition-preset/compare/v1.2.2...v1.3.0) (2024-10-31)
+
+
+### Features
+
+* support set global config ([656c02f](https://github.com/hemengke1997/react-transition-preset/commit/656c02f60589fcac904c9ad948d028f287cc5bdd))
+
+
+
 ## [1.2.2](https://github.com/hemengke1997/react-transition-preset/compare/v1.2.1...v1.2.2) (2024-10-15)
 
 
