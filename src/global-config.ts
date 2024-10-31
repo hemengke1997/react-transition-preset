@@ -1,4 +1,4 @@
-import { type TransitionProps } from './transition'
+import { type TransitionProps } from './Transition'
 import { mergeOmitUndefined } from './utils'
 
 type TransitionConfig = Pick<
