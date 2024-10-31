@@ -1,3 +1,13 @@
+## [1.3.1](https://github.com/hemengke1997/react-transition-preset/compare/v1.3.0...v1.3.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* file name case [release] ([586f61c](https://github.com/hemengke1997/react-transition-preset/commit/586f61c66d6b084a7a4c60e5a953aeb2e6415612))
+* reduceMotion ([39c5939](https://github.com/hemengke1997/react-transition-preset/commit/39c5939828023f493b3f5583c3be044509b99689))
+
+
+
 # [1.3.0](https://github.com/hemengke1997/react-transition-preset/compare/v1.2.2...v1.3.0) (2024-10-31)
 
 
