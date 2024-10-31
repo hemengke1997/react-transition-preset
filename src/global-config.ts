@@ -3,7 +3,15 @@ import { mergeOmitUndefined } from './utils'
 
 type TransitionConfig = Pick<
   TransitionProps,
-  'transition' | 'duration' | 'exitDuration' | 'keepMounted' | 'enterDelay' | 'exitDelay' | 'timingFunction' | 'initial'
+  | 'transition'
+  | 'duration'
+  | 'exitDuration'
+  | 'keepMounted'
+  | 'enterDelay'
+  | 'exitDelay'
+  | 'timingFunction'
+  | 'initial'
+  | 'reduceMotion'
 >
 
 const defaultConfig: TransitionConfig = {
@@ -14,6 +22,7 @@ const defaultConfig: TransitionConfig = {
   exitDelay: 0,
   timingFunction: 'ease',
   initial: false,
+  reduceMotion: false,
 }
 
 export class GlobalConfig {

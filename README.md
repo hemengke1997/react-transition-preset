@@ -87,6 +87,9 @@ interface TransitionProps {
   /** Render function with transition styles argument */
   children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
 
+  /** Determines whether to reduce motion */
+  reduceMotion?: boolean
+
   /** Called when exit transition ends */
   onExited?: () => void
 

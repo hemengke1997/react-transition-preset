@@ -29,6 +29,9 @@ export interface TransitionProps {
   /** Render function with transition styles argument */
   children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
 
+  /** Determines whether to reduce motion */
+  reduceMotion?: boolean
+
   /** Called when exit transition ends */
   onExited?: () => void
 
@@ -49,8 +52,17 @@ export interface TransitionProps {
 }
 
 export function Transition({ mounted, children, onExit, onEntered, onEnter, onExited, ...rest }: TransitionProps) {
-  const { duration, enterDelay, exitDelay, exitDuration, initial, keepMounted, timingFunction, transition } =
-    GlobalConfig.merge(rest)
+  const {
+    duration,
+    enterDelay,
+    exitDelay,
+    exitDuration,
+    initial,
+    keepMounted,
+    timingFunction,
+    transition,
+    reduceMotion,
+  } = GlobalConfig.merge(rest)
 
   const { transitionDuration, transitionStatus, transitionTimingFunction } = useTransition({
     mounted,
@@ -64,6 +76,7 @@ export function Transition({ mounted, children, onExit, onEntered, onEnter, onEx
     onExited,
     enterDelay,
     exitDelay,
+    reduceMotion,
   })
 
   const createChildren = (style: CSSProperties) => {

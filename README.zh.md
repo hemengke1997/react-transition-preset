@@ -88,6 +88,9 @@ interface TransitionProps {
   /** 带有过渡样式参数的渲染函数 */
   children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
 
+  /** 是否减少动画 */
+  reduceMotion?: boolean
+
   /** 当退出过渡结束时调用 */
   onExited?: () => void
 
