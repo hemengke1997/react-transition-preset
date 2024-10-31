@@ -47,6 +47,18 @@ function Demo({ opened }: { opened: boolean }) {
 }
 ```
 
+### Global Configuration
+
+```ts
+import { setGlobalConfig } from 'react-transition-preset'
+
+setGlobalConfig({
+  duration: 150,
+  timingFunction: 'linear',
+  transition: 'fade-up'
+})
+```
+
 ## API
 
 ```ts
@@ -63,10 +75,10 @@ interface TransitionProps {
   /** Determines whether to set the transition when initializing */
   initial?: boolean
 
-  /** Transition duration in ms, `250` by default */
+  /** Transition duration in ms, `150` by default */
   duration?: number
 
-  /** Exit transition duration in ms, `250` by default */
+  /** Exit transition duration in ms, same as `duration` */
   exitDuration?: number
 
   /** Transition timing function, `theme.transitionTimingFunction` by default */

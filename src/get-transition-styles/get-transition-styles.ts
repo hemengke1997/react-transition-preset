@@ -1,4 +1,4 @@
-import { type PresetTransition, transitions } from '../transitions'
+import { type PresetTransition, presetTransitions } from '../preset-transitions'
 
 const transitionStatuses = {
   'entering': 'in',
@@ -26,15 +26,15 @@ export function getTransitionStyles({
   }
 
   if (typeof transition === 'string') {
-    if (!(transition in transitions)) {
+    if (!(transition in presetTransitions)) {
       return {}
     }
 
     return {
-      transitionProperty: transitions[transition].transitionProperty,
+      transitionProperty: presetTransitions[transition].transitionProperty,
       ...shared,
-      ...transitions[transition].common,
-      ...transitions[transition][transitionStatuses[state]],
+      ...presetTransitions[transition].common,
+      ...presetTransitions[transition][transitionStatuses[state]],
     }
   }
 

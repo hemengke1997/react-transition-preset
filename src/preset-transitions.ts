@@ -23,6 +23,10 @@ export type PresetTransitionName =
   | 'scale-x'
   | 'scale'
   | 'pop'
+  | 'pop-top'
+  | 'pop-bottom'
+  | 'pop-left'
+  | 'pop-right'
   | 'pop-top-left'
   | 'pop-top-right'
   | 'pop-bottom-left'
@@ -30,16 +34,22 @@ export type PresetTransitionName =
 
 export type PresetTransition = PresetTransitionName | PresetTransitionStyles
 
-const popIn = (from: 'top' | 'bottom') => ({
+const pop = {
+  center: 0,
+  top: -16,
+  bottom: 16,
+}
+
+const popIn = (from: 'top' | 'bottom' | 'center') => ({
   in: { opacity: 1, transform: 'scale(1)' },
   out: {
     opacity: 0,
-    transform: `scale(var(--transition-preset-pop-in-${from}-scale, 0.9)) translateY(var(--transition-preset-pop-in-${from}, ${from === 'bottom' ? 10 : -10}px))`,
+    transform: `scale(var(--transition-preset-pop-in-${from}-scale, 0.9)) translateY(var(--transition-preset-pop-in-${from}, ${pop[from]}px))`,
   },
   transitionProperty: 'transform, opacity',
 })
 
-export const transitions: Record<PresetTransitionName, PresetTransitionStyles> = {
+export const presetTransitions: Record<PresetTransitionName, PresetTransitionStyles> = {
   'fade': {
     in: { opacity: 1 },
     out: { opacity: 0 },
@@ -48,25 +58,25 @@ export const transitions: Record<PresetTransitionName, PresetTransitionStyles> =
 
   'fade-up': {
     in: { opacity: 1, transform: 'translateY(0)' },
-    out: { opacity: 0, transform: `translateY(var(--transition-preset-fade-up, -30px))` },
+    out: { opacity: 0, transform: `translateY(var(--transition-preset-fade-up, -16px))` },
     transitionProperty: 'opacity, transform',
   },
 
   'fade-down': {
     in: { opacity: 1, transform: 'translateY(0)' },
-    out: { opacity: 0, transform: `translateY(var(--transtion-preset-fade-down, 30px)` },
+    out: { opacity: 0, transform: `translateY(var(--transtion-preset-fade-down, 16px)` },
     transitionProperty: 'opacity, transform',
   },
 
   'fade-left': {
     in: { opacity: 1, transform: 'translateX(0)' },
-    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-left, -30px))` },
+    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-left, -16px))` },
     transitionProperty: 'opacity, transform',
   },
 
   'fade-right': {
     in: { opacity: 1, transform: 'translateX(0)' },
-    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-right, 30px)` },
+    out: { opacity: 0, transform: `translateX(var(--transition-preset-fade-right, 16px)` },
     transitionProperty: 'opacity, transform',
   },
 
@@ -160,8 +170,28 @@ export const transitions: Record<PresetTransitionName, PresetTransitionStyles> =
   },
 
   'pop': {
-    ...popIn('bottom'),
+    ...popIn('center'),
     common: { transformOrigin: 'center center' },
+  },
+
+  'pop-top': {
+    ...popIn('top'),
+    common: { transformOrigin: 'top center' },
+  },
+
+  'pop-bottom': {
+    ...popIn('bottom'),
+    common: { transformOrigin: 'bottom center' },
+  },
+
+  'pop-left': {
+    ...popIn('center'),
+    common: { transformOrigin: 'center left' },
+  },
+
+  'pop-right': {
+    ...popIn('center'),
+    common: { transformOrigin: 'center right' },
   },
 
   'pop-bottom-left': {

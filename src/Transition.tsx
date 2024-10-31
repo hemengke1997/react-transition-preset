@@ -1,6 +1,7 @@
 import { cloneElement, type CSSProperties } from 'react'
 import { getTransitionStyles } from './get-transition-styles/get-transition-styles'
-import { type PresetTransition } from './transitions'
+import { GlobalConfig } from './global-config'
+import { type PresetTransition } from './preset-transitions'
 import { useTransition } from './use-transition'
 
 export interface TransitionProps {
@@ -16,10 +17,10 @@ export interface TransitionProps {
   /** Determines whether to set the transition when initializing */
   initial?: boolean
 
-  /** Transition duration in ms, `250` by default */
+  /** Transition duration in ms, `150` by default */
   duration?: number
 
-  /** Exit transition duration in ms, `250` by default */
+  /** Exit transition duration in ms, `150` by default */
   exitDuration?: number
 
   /** Transition timing function, `theme.transitionTimingFunction` by default */
@@ -47,22 +48,10 @@ export interface TransitionProps {
   exitDelay?: number
 }
 
-export function Transition({
-  keepMounted,
-  transition = 'fade',
-  initial = false,
-  duration = 250,
-  exitDuration = duration,
-  mounted,
-  children,
-  timingFunction = 'ease',
-  onExit,
-  onEntered,
-  onEnter,
-  onExited,
-  enterDelay,
-  exitDelay,
-}: TransitionProps) {
+export function Transition({ mounted, children, onExit, onEntered, onEnter, onExited, ...rest }: TransitionProps) {
+  const { duration, enterDelay, exitDelay, exitDuration, initial, keepMounted, timingFunction, transition } =
+    GlobalConfig.merge(rest)
+
   const { transitionDuration, transitionStatus, transitionTimingFunction } = useTransition({
     mounted,
     initial,

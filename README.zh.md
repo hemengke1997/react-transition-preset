@@ -48,6 +48,18 @@ function Demo({ opened }: { opened: boolean }) {
 }
 ```
 
+### 全局配置
+
+```ts
+import { setGlobalConfig } from 'react-transition-preset'
+
+setGlobalConfig({
+  duration: 150,
+  timingFunction: 'linear',
+  transition: 'fade-up'
+})
+```
+
 ## API
 
 ```ts
@@ -64,10 +76,10 @@ interface TransitionProps {
   /** 在初始化时设置过渡 */
   initial?: boolean
 
-  /** 过渡持续时间（毫秒），默认 `250` */
+  /** 过渡持续时间（毫秒），默认 `150` */
   duration?: number
 
-  /** 退出过渡持续时间（毫秒），默认 `250` */
+  /** 退出过渡持续时间（毫秒），默认与 `duration` 相同 */
   exitDuration?: number
 
   /** 过渡时间函数，默认 `theme.transitionTimingFunction` */
