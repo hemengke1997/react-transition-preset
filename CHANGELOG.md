@@ -1,3 +1,12 @@
+# [2.0.0](https://github.com/hemengke1997/react-transition-preset/compare/v1.3.1...v2.0.0) (2024-11-15)
+
+
+### Features
+
+* viewport transition ([d9ac194](https://github.com/hemengke1997/react-transition-preset/commit/d9ac1948efba02103fdef000b6811a9f4f4e87c0))
+
+
+
 ## [1.3.1](https://github.com/hemengke1997/react-transition-preset/compare/v1.3.0...v1.3.1) (2024-10-31)
 
 
