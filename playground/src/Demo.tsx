@@ -9,15 +9,35 @@ export default function Demo(props: Props) {
   const { transition } = props
   const [open, setOpen] = useState(true)
 
+  const tx = [
+    {
+      mounted: open,
+    },
+    {
+      mounted: 'whileInView' as const,
+      desc: 'whileInView',
+    },
+  ]
+
   return (
-    <div className={'flex w-80 items-center justify-between'}>
-      <Button onClick={() => setOpen((t) => !t)}>{transition}</Button>
-      <div className={'relative h-40 w-40'}>
-        <Transition transition={transition} mounted={open}>
-          <div className={'absolute flex h-full w-full items-center justify-center rounded-lg bg-blue-400 text-white'}>
-            {transition}
+    <div className={'flex items-center justify-between'}>
+      <Button className={'mr-2'} onClick={() => setOpen((t) => !t)}>
+        {transition}
+      </Button>
+      <div className={'flex gap-x-4'}>
+        {tx.map((item, index) => (
+          <div className={'relative h-40 w-40'} key={index}>
+            <Transition transition={transition} mounted={item.mounted}>
+              <div
+                className={
+                  'absolute flex h-full w-full flex-col items-center justify-center rounded-lg bg-blue-400 text-white'
+                }
+              >
+                <div>{item.desc || transition}</div>
+              </div>
+            </Transition>
           </div>
-        </Transition>
+        ))}
       </div>
     </div>
   )

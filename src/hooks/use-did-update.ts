@@ -1,12 +1,22 @@
 import { type DependencyList, type EffectCallback, useRef } from 'react'
 import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 
-export function useDidUpdate(fn: EffectCallback, dependencies?: DependencyList, initial = false) {
-  const mounted = useRef(initial)
+/**
+ * Executes a function when dependencies changed after hook mouted
+ */
+export function useDidUpdate(
+  fn: EffectCallback,
+  options: {
+    initialMounted?: boolean
+    deps?: DependencyList
+  },
+) {
+  const { initialMounted, deps } = options
+  const mounted = useRef(initialMounted)
 
   useIsomorphicLayoutEffect(
     () => () => {
-      mounted.current = initial
+      mounted.current = initialMounted
     },
     [],
   )
@@ -18,5 +28,5 @@ export function useDidUpdate(fn: EffectCallback, dependencies?: DependencyList, 
 
     mounted.current = true
     return undefined
-  }, dependencies)
+  }, deps)
 }

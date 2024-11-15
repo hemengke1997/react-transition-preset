@@ -1,6 +1,6 @@
 # react-transition-preset
 
-> Lightweight, zero-dependency transition component with common preset transition.
+> Lightweight, zero-dependency transition component for React with common preset transition.
 
 [中文文档](./README.zh.md)
 
@@ -27,7 +27,7 @@ function Demo({ opened }: { opened: boolean }) {
       duration={400}
       timingFunction='ease'
     >
-      <div>your component</div>
+      <div>Hello, World!</div>
     </Transition>
   )
 }
@@ -41,13 +41,32 @@ import { Transition } from 'react-transition-preset'
 function Demo({ opened }: { opened: boolean }) {
   return (
     <Transition mounted={opened}>
-      {(styles) => <div style={styles}>your component</div>}
+      {(styles) => <div style={{
+        ...styles,
+        // custom styles
+      }}>Hello, World!</div>}
     </Transition>
   )
 }
 ```
 
-### Global Configuration
+## Viewport Transition
+
+`mounted` option supports `whileInView`, which starts the transition when the element enters or leaves the viewport
+
+```tsx
+import { Transition } from 'react-transition-preset'
+
+function Demo() {
+  return (
+    <Transition mounted='whileInView'>
+      <div>Hello, World!</div>
+    </Transition>
+  )
+}
+```
+
+## Global Configuration
 
 ```ts
 import { setGlobalConfig } from 'react-transition-preset'
@@ -64,10 +83,13 @@ setGlobalConfig({
 ```ts
 interface TransitionProps {
   /** Determines whether component should be mounted to the DOM */
-  mounted: boolean
+  mounted: boolean | 'whileInView'
 
   /** If set element will not be unmounted from the DOM when it is hidden, `display: none` styles will be applied instead */
   keepMounted?: boolean
+
+  /** If mounted is `whileInView`, this will determine the options for the useInView hook */
+  viewport?: UseInViewOptions
 
   /** Transition name or object */
   transition?: PresetTransition
@@ -107,5 +129,11 @@ interface TransitionProps {
 
   /** Delay in ms before exit transition starts (ms) */
   exitDelay?: number
+
+  /** Custom element type. `div` by default */
+  as?: React.ElementType
+
+  /** Root Element attributes */
+  elementAttributes?: React.HTMLAttributes<React.ElementType>
 }
 ```

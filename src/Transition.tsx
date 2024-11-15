@@ -1,15 +1,19 @@
-import { cloneElement, type CSSProperties } from 'react'
+import { cloneElement, type CSSProperties, useRef } from 'react'
 import { getTransitionStyles } from './get-transition-styles/get-transition-styles'
 import { GlobalConfig } from './global-config'
+import { useInView, type UseInViewOptions } from './hooks/use-in-view'
 import { type PresetTransition } from './preset-transitions'
 import { useTransition } from './use-transition'
 
 export interface TransitionProps {
   /** Determines whether component should be mounted to the DOM */
-  mounted: boolean
+  mounted: boolean | 'whileInView'
 
   /** If set element will not be unmounted from the DOM when it is hidden, `display: none` styles will be applied instead */
   keepMounted?: boolean
+
+  /** If mounted is `whileInView`, this will determine the options for the useInView hook */
+  viewport?: UseInViewOptions
 
   /** Transition name or object */
   transition?: PresetTransition
@@ -49,9 +53,26 @@ export interface TransitionProps {
 
   /** Delay in ms before exit transition starts (ms) */
   exitDelay?: number
+
+  /** Custom element type. `div` by default */
+  as?: React.ElementType
+
+  /** Root element attributes */
+  elementAttributes?: React.HTMLAttributes<React.ElementType>
 }
 
-export function Transition({ mounted, children, onExit, onEntered, onEnter, onExited, ...rest }: TransitionProps) {
+export function Transition({
+  mounted: _mounted,
+  children,
+  onExit,
+  onEntered,
+  onEnter,
+  onExited,
+  as = 'div',
+  viewport,
+  elementAttributes,
+  ...rest
+}: TransitionProps) {
   const {
     duration,
     enterDelay,
@@ -63,6 +84,15 @@ export function Transition({ mounted, children, onExit, onEntered, onEnter, onEx
     transition,
     reduceMotion,
   } = GlobalConfig.merge(rest)
+
+  const mountedInView = _mounted === 'whileInView'
+
+  const el = useRef<HTMLElement | null>(null)
+  const isInView = useInView(el, viewport, {
+    enable: mountedInView,
+  })
+
+  const mounted = mountedInView ? isInView : _mounted
 
   const { transitionDuration, transitionStatus, transitionTimingFunction } = useTransition({
     mounted,
@@ -79,21 +109,33 @@ export function Transition({ mounted, children, onExit, onEntered, onEnter, onEx
     reduceMotion,
   })
 
-  const createChildren = (style: CSSProperties) => {
-    if (typeof children === 'function') {
-      return children(style)
+  const createChildren = (style: CSSProperties, { mounted }: { mounted: boolean }) => {
+    let element: JSX.Element
+
+    if (mounted || keepMounted) {
+      if (typeof children === 'function') {
+        element = children(style)
+      } else {
+        element = cloneElement(children, { style }) as JSX.Element
+      }
+    } else {
+      element = <></>
     }
-    return cloneElement(children, { style }) as JSX.Element
+
+    const Comp = as
+    return (
+      <Comp ref={el} {...elementAttributes}>
+        {element}
+      </Comp>
+    )
   }
 
   if (transitionDuration === 0) {
-    return mounted ? <>{createChildren({})}</> : keepMounted ? createChildren({ display: 'none' }) : null
+    return createChildren({}, { mounted })
   }
 
   return transitionStatus === 'exited' ? (
-    keepMounted ? (
-      createChildren({ display: 'none' })
-    ) : null
+    createChildren({ display: 'none' }, { mounted: false })
   ) : (
     <>
       {createChildren(
@@ -103,6 +145,7 @@ export function Transition({ mounted, children, onExit, onEntered, onEnter, onEx
           state: transitionStatus,
           timingFunction: transitionTimingFunction,
         }),
+        { mounted: true },
       )}
     </>
   )

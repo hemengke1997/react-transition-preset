@@ -1,6 +1,6 @@
 # react-transition-preset
 
-> 轻量零依赖的过渡组件，预设了常见过渡效果
+> 轻量零依赖的 React 过渡组件，预设了常见过渡效果
 
 [English Docs](./README.md)
 
@@ -28,7 +28,7 @@ function Demo({ opened }: { opened: boolean }) {
       duration={400}
       timingFunction='ease'
     >
-      {(styles) => <div style={styles}>你的组件</div>}
+      <div>Hello, World!</div>
     </Transition>
   )
 }
@@ -42,13 +42,32 @@ import { Transition } from 'react-transition-preset'
 function Demo({ opened }: { opened: boolean }) {
   return (
     <Transition mounted={opened}>
-      {(styles) => <div style={styles}>your component</div>}
+      {(styles) => <div style={{
+        ...styles,
+        // 自定义样式
+      }}>Hello, World!</div>}
     </Transition>
   )
 }
 ```
 
-### 全局配置
+## Viewport 视窗过渡
+
+`mounted` 选项支持 `whileInView`，当元素进入或离开视窗时，开始过渡动画
+
+```tsx
+import { Transition } from 'react-transition-preset'
+
+function Demo() {
+  return (
+    <Transition mounted='whileInView'>
+      <div>Hello, World!</div>
+    </Transition>
+  )
+}
+```
+
+## 全局配置
 
 ```ts
 import { setGlobalConfig } from 'react-transition-preset'
@@ -65,10 +84,13 @@ setGlobalConfig({
 ```ts
 interface TransitionProps {
   /** 确定组件是否应该挂载到 DOM */
-  mounted: boolean
+  mounted: boolean | 'whileInView'
   
   /** 如果设置了，当元素隐藏时不会从 DOM 中卸载，而是应用 `display: none` 样式 */
   keepMounted?: boolean
+
+  /** 如果 mounted 是 `whileInView`，此选项透传 useInView */ 
+  viewport?: UseInViewOptions
 
   /** 过渡名称或对象 */
   transition?: PresetTransition
@@ -108,5 +130,11 @@ interface TransitionProps {
 
   /** 退出过渡开始前的延迟时间（毫秒） */
   exitDelay?: number
+
+  /** 自定义元素类型，默认 `div` */
+  as?: React.ElementType
+
+  /** 根元素的 attributes */
+  elementAttributes?: React.HTMLAttributes<React.ElementType>
 }
 ```

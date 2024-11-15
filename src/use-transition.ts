@@ -36,10 +36,10 @@ export function useTransition({
 }: UseTransition) {
   const [transitionDuration, setTransitionDuration] = useState(reduceMotion ? 0 : duration)
   const [transitionStatus, setStatus] = useState<TransitionStatus>(() => {
-    if (initial && mounted) {
-      return 'pre-entering'
+    if (mounted) {
+      return initial ? 'pre-entering' : 'entered'
     }
-    return mounted ? 'entered' : 'exited'
+    return 'exited'
   })
   const transitionTimeoutRef = useRef<number>(-1)
   const delayTimeoutRef = useRef<number>(-1)
@@ -99,8 +99,10 @@ export function useTransition({
     () => {
       handleTransitionWithDelay(mounted)
     },
-    [mounted],
-    initial,
+    {
+      deps: [mounted],
+      initialMounted: initial,
+    },
   )
 
   useIsomorphicLayoutEffect(

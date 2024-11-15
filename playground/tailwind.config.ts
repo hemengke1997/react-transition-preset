@@ -4,6 +4,6 @@ export default {
   content: ['./src/**/*.{ts,tsx}'],
   darkMode: ['selector', '[data-theme="dark"]'],
   corePlugins: {
-    preflight: true,
+    preflight: false,
   },
 } as Config

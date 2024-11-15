@@ -13,7 +13,10 @@ function App() {
   ))
 
   return (
-    <div className={'flex w-screen items-center justify-center p-10'}>
+    <div className={'flex w-screen flex-col items-center justify-center p-10'}>
+      <h1 className={'mb-8 text-4xl font-bold'}>
+        <a href='https://github.com/hemengke1997/react-transition-preset'>React Transition Preset</a>
+      </h1>
       <div className={'flex flex-col gap-2'}>{demos}</div>
     </div>
   )
