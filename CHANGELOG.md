@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/hemengke1997/react-transition-preset/compare/v2.0.0...v2.1.0) (2024-11-26)
+
+
+### Features
+
+* unsafe api ([5de580e](https://github.com/hemengke1997/react-transition-preset/commit/5de580ef1a6e68c96c733ee9e42a866385621f22))
+
+
+
 # [2.0.0](https://github.com/hemengke1997/react-transition-preset/compare/v1.3.1...v2.0.0) (2024-11-15)
 
 
