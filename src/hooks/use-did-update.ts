@@ -23,7 +23,8 @@ export function useDidUpdate(
 
   useIsomorphicLayoutEffect(() => {
     if (mounted.current) {
-      return fn()
+      fn()
+      return
     }
 
     mounted.current = true

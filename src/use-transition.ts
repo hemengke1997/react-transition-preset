@@ -52,6 +52,7 @@ export function useTransition({
     window.clearTimeout(transitionTimeoutRef.current)
 
     const newTransitionDuration = reduceMotion ? 0 : shouldMount ? duration : exitDuration
+
     setTransitionDuration(newTransitionDuration)
 
     if (newTransitionDuration === 0) {

@@ -1,4 +1,4 @@
-import { cloneElement, type CSSProperties, useRef } from 'react'
+import { cloneElement, type CSSProperties, isValidElement, useRef } from 'react'
 import { getTransitionStyles } from './get-transition-styles/get-transition-styles'
 import { GlobalConfig } from './global-config'
 import { useInView, type UseInViewOptions } from './hooks/use-in-view'
@@ -59,6 +59,12 @@ export interface TransitionProps {
 
   /** Root element attributes */
   elementAttributes?: React.HTMLAttributes<React.ElementType>
+
+  /**
+   * DO NOT USE
+   * @internal
+   */
+  unsafe_alwaysMounted?: boolean
 }
 
 export function Transition({
@@ -71,6 +77,7 @@ export function Transition({
   as = 'div',
   viewport,
   elementAttributes,
+  unsafe_alwaysMounted,
   ...rest
 }: TransitionProps) {
   const {
@@ -110,16 +117,22 @@ export function Transition({
   })
 
   const createChildren = (style: CSSProperties, { mounted }: { mounted: boolean }) => {
-    let element: JSX.Element
+    let element: React.ReactElement | null
 
     if (mounted || keepMounted) {
       if (typeof children === 'function') {
         element = children(style)
       } else {
-        element = cloneElement(children, { style }) as JSX.Element
+        // Context will be lost when using cloneElement
+        // Use as your risk
+        if (isValidElement(children)) {
+          element = cloneElement(children as React.ReactElement, { style })
+        } else {
+          element = children
+        }
       }
     } else {
-      element = <></>
+      element = null
     }
 
     const Comp = as
@@ -130,23 +143,26 @@ export function Transition({
     )
   }
 
-  if (transitionDuration === 0) {
-    return createChildren({}, { mounted })
+  const createTransitionChildren = ({ mounted }: { mounted: boolean }) => {
+    return createChildren(
+      getTransitionStyles({
+        transition,
+        duration: transitionDuration,
+        state: transitionStatus,
+        timingFunction: transitionTimingFunction,
+      }),
+      { mounted },
+    )
   }
 
-  return transitionStatus === 'exited' ? (
-    createChildren({ display: 'none' }, { mounted: false })
-  ) : (
-    <>
-      {createChildren(
-        getTransitionStyles({
-          transition,
-          duration: transitionDuration,
-          state: transitionStatus,
-          timingFunction: transitionTimingFunction,
-        }),
-        { mounted: true },
-      )}
-    </>
-  )
+  const isExited = transitionStatus === 'exited'
+
+  if (isExited) {
+    if (unsafe_alwaysMounted) {
+      return createTransitionChildren({ mounted: false })
+    }
+    return createChildren({ display: 'none' }, { mounted: false })
+  }
+
+  return createTransitionChildren({ mounted: true })
 }
