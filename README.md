@@ -78,6 +78,10 @@ setGlobalConfig({
 })
 ```
 
+## Preset Transition
+
+See [Preset Transition](https://hemengke1997.github.io/react-transition-preset/)
+
 ## API
 
 ```ts

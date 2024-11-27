@@ -79,6 +79,10 @@ setGlobalConfig({
 })
 ```
 
+## 预设过渡
+
+查看 [预设过渡](https://hemengke1997.github.io/react-transition-preset/)
+
 ## API
 
 ```ts
