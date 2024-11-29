@@ -1,6 +1,6 @@
 {
   "name": "react-transition-preset",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "packageManager": "pnpm@9.7.1",
   "description": "Lightweight, zero-dependency transition component for React with common preset transition",
   "type": "module",

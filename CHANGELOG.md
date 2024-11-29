@@ -1,3 +1,7 @@
+# [2.2.0](https://github.com/hemengke1997/react-transition-preset/compare/v2.1.0...v2.2.0) (2024-11-29)
+
+
+
 # [2.1.0](https://github.com/hemengke1997/react-transition-preset/compare/v2.0.0...v2.1.0) (2024-11-26)
 
 
