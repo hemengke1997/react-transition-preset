@@ -93,7 +93,12 @@ interface TransitionProps {
   keepMounted?: boolean
 
   /** If mounted is `whileInView`, this will determine the options for the useInView hook */
-  viewport?: UseInViewOptions
+  viewport?: UseInViewOptions & {
+    /** Custom placeholder element type. `div` by default */
+    placeholder?: React.ElementType
+    /** Placeholder attributes */
+    attributes?: React.HTMLAttributes<React.ElementType>
+  }
 
   /** Transition name or object */
   transition?: PresetTransition
@@ -133,11 +138,5 @@ interface TransitionProps {
 
   /** Delay in ms before exit transition starts (ms) */
   exitDelay?: number
-
-  /** Custom element type. `div` by default */
-  as?: React.ElementType
-
-  /** Root Element attributes */
-  elementAttributes?: React.HTMLAttributes<React.ElementType>
 }
 ```

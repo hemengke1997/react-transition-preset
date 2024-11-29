@@ -13,7 +13,12 @@ export interface TransitionProps {
   keepMounted?: boolean
 
   /** If mounted is `whileInView`, this will determine the options for the useInView hook */
-  viewport?: UseInViewOptions
+  viewport?: UseInViewOptions & {
+    /** Custom placeholder element type. `div` by default */
+    placeholder?: React.ElementType
+    /** Placeholder attributes */
+    attributes?: React.HTMLAttributes<React.ElementType>
+  }
 
   /** Transition name or object */
   transition?: PresetTransition
@@ -54,12 +59,6 @@ export interface TransitionProps {
   /** Delay in ms before exit transition starts (ms) */
   exitDelay?: number
 
-  /** Custom element type. `div` by default */
-  as?: React.ElementType
-
-  /** Root element attributes */
-  elementAttributes?: React.HTMLAttributes<React.ElementType>
-
   /**
    * DO NOT USE
    * @internal
@@ -74,9 +73,7 @@ export function Transition({
   onEntered,
   onEnter,
   onExited,
-  as = 'div',
   viewport,
-  elementAttributes,
   unsafe_alwaysMounted,
   ...rest
 }: TransitionProps) {
@@ -135,9 +132,15 @@ export function Transition({
       element = null
     }
 
-    const Comp = as
+    if (!mountedInView) {
+      return element
+    }
+
+    const { placeholder = 'div', attributes } = viewport || {}
+
+    const Comp = placeholder
     return (
-      <Comp ref={el} {...elementAttributes}>
+      <Comp ref={el} {...attributes}>
         {element}
       </Comp>
     )

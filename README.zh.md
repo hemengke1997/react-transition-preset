@@ -94,7 +94,12 @@ interface TransitionProps {
   keepMounted?: boolean
 
   /** 如果 mounted 是 `whileInView`，此选项透传 useInView */ 
-  viewport?: UseInViewOptions
+  viewport?: UseInViewOptions & {
+    /** 自定义占位元素类型，默认 `div` */
+    placeholder?: React.ElementType
+    /** 占位元素HTML属性 */
+    attributes?: React.HTMLAttributes<React.ElementType>
+  }
 
   /** 过渡名称或对象 */
   transition?: PresetTransition
@@ -134,11 +139,5 @@ interface TransitionProps {
 
   /** 退出过渡开始前的延迟时间（毫秒） */
   exitDelay?: number
-
-  /** 自定义元素类型，默认 `div` */
-  as?: React.ElementType
-
-  /** 根元素的 attributes */
-  elementAttributes?: React.HTMLAttributes<React.ElementType>
 }
 ```
