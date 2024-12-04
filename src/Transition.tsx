@@ -1,11 +1,11 @@
-import { cloneElement, type CSSProperties, isValidElement, useRef } from 'react'
+import { cloneElement, type CSSProperties, type ElementType, isValidElement, useRef } from 'react'
 import { getTransitionStyles } from './get-transition-styles/get-transition-styles'
 import { GlobalConfig } from './global-config'
 import { useInView, type UseInViewOptions } from './hooks/use-in-view'
 import { type PresetTransition } from './preset-transitions'
 import { useTransition } from './use-transition'
 
-export interface TransitionProps {
+export interface TransitionProps<T extends keyof JSX.IntrinsicElements = 'div'> {
   /** Determines whether component should be mounted to the DOM */
   mounted: boolean | 'whileInView'
 
@@ -15,9 +15,9 @@ export interface TransitionProps {
   /** If mounted is `whileInView`, this will determine the options for the useInView hook */
   viewport?: UseInViewOptions & {
     /** Custom placeholder element type. `div` by default */
-    placeholder?: React.ElementType
+    placeholder?: T
     /** Placeholder attributes */
-    attributes?: React.HTMLAttributes<React.ElementType>
+    attributes?: Omit<JSX.IntrinsicElements[T], 'ref'>
   }
 
   /** Transition name or object */
@@ -66,7 +66,7 @@ export interface TransitionProps {
   unsafe_alwaysMounted?: boolean
 }
 
-export function Transition({
+export const Transition = <T extends keyof JSX.IntrinsicElements>({
   mounted: _mounted,
   children,
   onExit,
@@ -76,7 +76,7 @@ export function Transition({
   viewport,
   unsafe_alwaysMounted,
   ...rest
-}: TransitionProps) {
+}: TransitionProps<T>) => {
   const {
     duration,
     enterDelay,
@@ -91,7 +91,7 @@ export function Transition({
 
   const mountedInView = _mounted === 'whileInView'
 
-  const el = useRef<HTMLElement | null>(null)
+  const el = useRef<HTMLElement>(null)
   const isInView = useInView(el, viewport, {
     enable: mountedInView,
   })
@@ -136,13 +136,13 @@ export function Transition({
       return element
     }
 
-    const { placeholder = 'div', attributes } = viewport || {}
+    const { placeholder, attributes } = viewport || {}
 
-    const Comp = placeholder
+    const Placeholder = placeholder || ('div' as ElementType)
     return (
-      <Comp ref={el} {...attributes}>
+      <Placeholder ref={el} {...attributes}>
         {element}
-      </Comp>
+      </Placeholder>
     )
   }
 
