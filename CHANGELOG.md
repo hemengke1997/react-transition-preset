@@ -1,3 +1,12 @@
+## [2.2.1](https://github.com/hemengke1997/react-transition-preset/compare/v2.2.0...v2.2.1) (2024-12-04)
+
+
+### Bug Fixes
+
+* type ([6acfdb5](https://github.com/hemengke1997/react-transition-preset/commit/6acfdb563e352feeff81b0af4f191901a0b07f9e))
+
+
+
 # [2.2.0](https://github.com/hemengke1997/react-transition-preset/compare/v2.1.0...v2.2.0) (2024-11-29)
 
 
