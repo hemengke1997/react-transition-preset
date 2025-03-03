@@ -1,4 +1,4 @@
-import { type PresetTransition, presetTransitions } from '../preset-transitions'
+import { presets, type TransitionMode } from '../presets'
 
 const transitionStatuses = {
   'entering': 'in',
@@ -15,7 +15,7 @@ export function getTransitionStyles({
   duration,
   timingFunction,
 }: {
-  transition: PresetTransition
+  transition: TransitionMode
   state: keyof typeof transitionStatuses
   duration: number
   timingFunction: React.CSSProperties['transitionTimingFunction']
@@ -26,15 +26,15 @@ export function getTransitionStyles({
   }
 
   if (typeof transition === 'string') {
-    if (!(transition in presetTransitions)) {
+    if (!(transition in presets)) {
       return {}
     }
 
     return {
-      transitionProperty: presetTransitions[transition].transitionProperty,
+      transitionProperty: presets[transition].transitionProperty,
       ...shared,
-      ...presetTransitions[transition].common,
-      ...presetTransitions[transition][transitionStatuses[state]],
+      ...presets[transition].common,
+      ...presets[transition][transitionStatuses[state]],
     }
   }
 

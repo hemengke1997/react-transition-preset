@@ -1,4 +1,5 @@
-import { type PresetTransitionName, presetTransitions, setGlobalConfig } from 'react-transition-preset'
+import { presets, setGlobalConfig } from 'react-transition-preset'
+import { type TransitionName } from 'react-transition-preset/types'
 import Demo from './Demo'
 
 setGlobalConfig({
@@ -6,9 +7,9 @@ setGlobalConfig({
 })
 
 function App() {
-  const demos = Object.keys(presetTransitions).map((transition) => (
+  const demos = Object.keys(presets).map((transition) => (
     <div key={transition}>
-      <Demo transition={transition as PresetTransitionName} />
+      <Demo transition={transition as TransitionName} />
     </div>
   ))
 

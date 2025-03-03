@@ -79,21 +79,25 @@ setGlobalConfig({
 })
 ```
 
-## 预设过渡
-
-查看 [预设过渡](https://hemengke1997.github.io/react-transition-preset/)
-
 ## API
 
 ```ts
 interface TransitionProps {
-  /** 确定组件是否应该挂载到 DOM */
+  /** 
+   * @description 确定组件是否应该挂载到 DOM
+   * @default false
+   */
   mounted: boolean | 'whileInView'
   
-  /** 如果设置了，当元素隐藏时不会从 DOM 中卸载，而是应用 `display: none` 样式 */
+  /** 
+   * @description 如果设置了，当元素隐藏时不会从 DOM 中卸载，而是应用 `display: none` 样式
+   * @default false
+   */
   keepMounted?: boolean
 
-  /** 如果 mounted 是 `whileInView`，此选项透传 useInView */ 
+  /** 
+   * @description 如果 mounted 是 `whileInView`，此选项透传 useInView
+   */ 
   viewport?: UseInViewOptions & {
     /** 自定义占位元素类型，默认 `div` */
     placeholder?: React.ElementType
@@ -101,43 +105,77 @@ interface TransitionProps {
     attributes?: React.HTMLAttributes<React.ElementType>
   }
 
-  /** 过渡名称或对象 */
+  /** 
+   * @description 过渡名称或对象
+   * @default 'fade'
+   */
   transition?: PresetTransition
 
-  /** 在初始化时设置过渡 */
+  /** 
+   * @description 在初始化时设置过渡
+   * @default false
+   */
   initial?: boolean
 
-  /** 过渡持续时间（毫秒），默认 `150` */
+  /** 
+   * @description 过渡持续时间（毫秒）
+   * @default 150
+   */
   duration?: number
 
-  /** 退出过渡持续时间（毫秒），默认与 `duration` 相同 */
+  /**
+   * @description 退出过渡持续时间（毫秒） 
+   * @default 150
+   */
   exitDuration?: number
 
-  /** 过渡时间函数，默认 `theme.transitionTimingFunction` */
+  /** 
+   * @description 过渡时间函数
+   * @default 'ease'
+   */
   timingFunction?: string
 
-  /** 带有过渡样式参数的渲染函数 */
+  /** 
+   * @description 带有过渡样式参数的渲染函数
+   */
   children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
 
-  /** 是否减少动画 */
+  /** 
+   * @description 是否减少动画
+   * @default false
+   */
   reduceMotion?: boolean
 
-  /** 当退出过渡结束时调用 */
+  /** 
+   * @description 当退出过渡结束时调用
+   */
   onExited?: () => void
 
-  /** 当退出过渡开始时调用 */
+  /** 
+   * @description 当退出过渡开始时调用
+   */
   onExit?: () => void
 
-  /** 当进入过渡开始时调用 */
+  /** 
+   * @description 当进入过渡开始时调用
+   */
   onEnter?: () => void
 
-  /** 当进入过渡结束时调用 */
+  /** 
+   * @description 当进入过渡结束时调用
+   */
   onEntered?: () => void
 
-  /** 进入过渡开始前的延迟时间（毫秒） */
+  /** 
+   * @description 进入过渡开始前的延迟时间（毫秒）
+   * @default 0
+   */
   enterDelay?: number
 
-  /** 退出过渡开始前的延迟时间（毫秒） */
+  /** 
+   * @description 退出过渡开始前的延迟时间（毫秒）
+   * @default 0
+   */
   exitDelay?: number
 }
 ```

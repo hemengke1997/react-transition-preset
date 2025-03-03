@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { type PresetTransitionName, Transition } from 'react-transition-preset'
+import { Transition } from 'react-transition-preset'
+import { type TransitionName } from 'react-transition-preset/types'
 import { Button } from 'antd'
 
 type Props = {
-  transition: PresetTransitionName
+  transition: TransitionName
 }
 export default function Demo(props: Props) {
   const { transition } = props

@@ -1,11 +1,11 @@
-export interface PresetTransitionStyles {
+export interface TransitionStyles {
   common?: React.CSSProperties
   in: React.CSSProperties
   out: React.CSSProperties
   transitionProperty: React.CSSProperties['transitionProperty']
 }
 
-export type PresetTransitionName =
+export type TransitionName =
   | 'fade'
   | 'fade-down'
   | 'fade-up'
@@ -32,7 +32,7 @@ export type PresetTransitionName =
   | 'pop-bottom-left'
   | 'pop-bottom-right'
 
-export type PresetTransition = PresetTransitionName | PresetTransitionStyles
+export type TransitionMode = TransitionName | TransitionStyles
 
 const pop = {
   center: 0,
@@ -49,7 +49,7 @@ const popIn = (from: 'top' | 'bottom' | 'center') => ({
   transitionProperty: 'transform, opacity',
 })
 
-export const presetTransitions: Record<PresetTransitionName, PresetTransitionStyles> = {
+export const presets: Record<TransitionName, TransitionStyles> = {
   'fade': {
     in: { opacity: 1 },
     out: { opacity: 0 },

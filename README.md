@@ -78,65 +78,103 @@ setGlobalConfig({
 })
 ```
 
-## Preset Transition
-
-See [Preset Transition](https://hemengke1997.github.io/react-transition-preset/)
-
 ## API
 
 ```ts
 interface TransitionProps {
-  /** Determines whether component should be mounted to the DOM */
+  /**
+   * @description Determines whether component should be mounted to the DOM
+   * @default false
+   */
   mounted: boolean | 'whileInView'
 
-  /** If set element will not be unmounted from the DOM when it is hidden, `display: none` styles will be applied instead */
+  /**
+   * @description If set element will not be unmounted from the DOM when it is hidden, `display: none` styles will be applied instead
+   * @default false
+   */
   keepMounted?: boolean
 
-  /** If mounted is `whileInView`, this will determine the options for the useInView hook */
+  /**
+   * @description If mounted is `whileInView`, this will determine the options for the useInView hook
+   */
   viewport?: UseInViewOptions & {
     /** Custom placeholder element type. `div` by default */
-    placeholder?: React.ElementType
+    placeholder?: T
     /** Placeholder attributes */
-    attributes?: React.HTMLAttributes<React.ElementType>
+    attributes?: Omit<JSX.IntrinsicElements[T], 'ref'>
   }
 
-  /** Transition name or object */
-  transition?: PresetTransition
+  /**
+   * @description Transition name or object
+   * @default 'fade'
+   */
+  transition?: TransitionMode
 
-  /** Determines whether to set the transition when initializing */
+  /**
+   * @description Determines whether to set the transition when initializing
+   * @default false
+   */
   initial?: boolean
 
-  /** Transition duration in ms, `150` by default */
+  /**
+   * @description Transition duration in ms
+   * @default 150
+   */
   duration?: number
 
-  /** Exit transition duration in ms, same as `duration` */
+  /**
+   * @description Exit transition duration in ms
+   * @default 150
+   */
   exitDuration?: number
 
-  /** Transition timing function, `theme.transitionTimingFunction` by default */
+  /**
+   * @description Transition timing function
+   * @default 'ease'
+   */
   timingFunction?: string
 
-  /** Render function with transition styles argument */
+  /** 
+   * @description Render function with transition styles argument
+   */
   children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
 
-  /** Determines whether to reduce motion */
+  /**
+   * @description Determines whether to reduce motion
+   * @default false
+   */
   reduceMotion?: boolean
 
-  /** Called when exit transition ends */
+  /**
+   * @description Called when exit transition ends
+   */
   onExited?: () => void
 
-  /** Called when exit transition starts */
+  /**
+   * @description Called when exit transition starts
+   */
   onExit?: () => void
 
-  /** Called when enter transition starts */
+  /**
+   * @description Called when enter transition starts
+   */
   onEnter?: () => void
 
-  /** Called when enter transition ends */
+  /**
+   * @description Called when enter transition ends
+   */
   onEntered?: () => void
 
-  /** Delay in ms before enter transition starts (ms) */
+  /**
+   * @description Delay in ms before enter transition starts (ms)
+   * @default 0
+   */
   enterDelay?: number
 
-  /** Delay in ms before exit transition starts (ms) */
+  /**
+   * @description Delay in ms before exit transition starts (ms)
+   * @default 0
+   */
   exitDelay?: number
 }
 ```
