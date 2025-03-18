@@ -2,6 +2,7 @@ import { cloneElement, type CSSProperties, type ElementType, isValidElement, use
 import { getTransitionStyles } from './get-transition-styles/get-transition-styles'
 import { GlobalConfig } from './global-config'
 import { useInView, type UseInViewOptions } from './hooks/use-in-view'
+import { useMemoizedFn } from './hooks/use-memoized-fn'
 import { type TransitionMode } from './presets'
 import { TransitionStatus, useTransition } from './use-transition'
 
@@ -155,7 +156,7 @@ export const Transition = <T extends keyof JSX.IntrinsicElements>({
     reduceMotion,
   })
 
-  const createChildren = (style: CSSProperties, { mounted }: { mounted: boolean }) => {
+  const createChildren = useMemoizedFn((style: CSSProperties, { mounted }: { mounted: boolean }) => {
     let element: React.ReactElement | null
 
     if (mounted || keepMounted) {
@@ -186,9 +187,9 @@ export const Transition = <T extends keyof JSX.IntrinsicElements>({
         {element}
       </Placeholder>
     )
-  }
+  })
 
-  const createTransitionChildren = ({ mounted }: { mounted: boolean }) => {
+  const createTransitionChildren = useMemoizedFn(({ mounted }: { mounted: boolean }) => {
     return createChildren(
       getTransitionStyles({
         transition,
@@ -198,7 +199,7 @@ export const Transition = <T extends keyof JSX.IntrinsicElements>({
       }),
       { mounted },
     )
-  }
+  })
 
   const isExited = transitionStatus === TransitionStatus.exited
 

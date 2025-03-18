@@ -1,5 +1,7 @@
 // Adapted from motion/viewport
 
+import { useMemoizedFn } from '../hooks/use-memoized-fn'
+
 type ViewChangeHandler = (entry: IntersectionObserverEntry) => void
 
 type ElementOrSelector = Element | Element[] | NodeListOf<Element> | string
@@ -44,7 +46,7 @@ export function inView(
 
   const activeIntersections = new WeakMap<Element, ViewChangeHandler>()
 
-  const onIntersectionChange: IntersectionObserverCallback = (entries) => {
+  const onIntersectionChange: IntersectionObserverCallback = useMemoizedFn((entries) => {
     entries.forEach((entry) => {
       const onEnd = activeIntersections.get(entry.target)
 
@@ -66,7 +68,7 @@ export function inView(
         activeIntersections.delete(entry.target)
       }
     })
-  }
+  })
 
   const observer = new IntersectionObserver(onIntersectionChange, {
     root,

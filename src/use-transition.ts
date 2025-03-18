@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { useDidUpdate } from './hooks/use-did-update'
 import { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect'
+import { useMemoizedFn } from './hooks/use-memoized-fn'
 
 export enum TransitionStatus {
   entered = 'entered',
@@ -64,7 +65,7 @@ export function useTransition(props: UseTransition) {
   const delayTimeoutRef = useRef<number>(-1)
   const rafRef = useRef(-1)
 
-  const handleStateChange = (shouldMount: boolean) => {
+  const handleStateChange = useMemoizedFn((shouldMount: boolean) => {
     const preHandler = shouldMount ? onEnter : onExit
     const handler = shouldMount ? onEntered : onExited
 
@@ -94,9 +95,9 @@ export function useTransition(props: UseTransition) {
         })
       })
     }
-  }
+  })
 
-  const handleTransitionWithDelay = (shouldMount: boolean) => {
+  const handleTransitionWithDelay = useMemoizedFn((shouldMount: boolean) => {
     window.clearTimeout(delayTimeoutRef.current)
     const delay = shouldMount ? enterDelay : exitDelay
 
@@ -111,7 +112,7 @@ export function useTransition(props: UseTransition) {
       },
       shouldMount ? enterDelay : exitDelay,
     )
-  }
+  })
 
   useDidUpdate(
     () => {

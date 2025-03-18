@@ -47,5 +47,5 @@ export class GlobalConfig {
 }
 
 export function setGlobalConfig(props: TransitionConfig) {
-  GlobalConfig.setConfig(props)
+  GlobalConfig.setConfig.call(GlobalConfig, props)
 }
