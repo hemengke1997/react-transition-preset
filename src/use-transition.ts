@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { useDidUpdate } from './hooks/use-did-update'
 import { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect'
 
@@ -61,7 +62,9 @@ export function useTransition({
     } else {
       // Make sure new status won't be set within the same frame as this would disrupt animation
       rafRef.current = requestAnimationFrame(() => {
-        setStatus(shouldMount ? 'pre-entering' : 'pre-exiting')
+        flushSync(() => {
+          setStatus(shouldMount ? 'pre-entering' : 'pre-exiting')
+        })
 
         rafRef.current = requestAnimationFrame(() => {
           typeof preHandler === 'function' && preHandler()
