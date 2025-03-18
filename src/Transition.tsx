@@ -3,7 +3,7 @@ import { getTransitionStyles } from './get-transition-styles/get-transition-styl
 import { GlobalConfig } from './global-config'
 import { useInView, type UseInViewOptions } from './hooks/use-in-view'
 import { type TransitionMode } from './presets'
-import { useTransition } from './use-transition'
+import { TransitionStatus, useTransition } from './use-transition'
 
 export interface TransitionProps<T extends keyof JSX.IntrinsicElements = 'div'> {
   /**
@@ -41,14 +41,14 @@ export interface TransitionProps<T extends keyof JSX.IntrinsicElements = 'div'> 
   initial?: boolean
 
   /**
-   * @description Transition duration in ms
-   * @default 150
+   * @description Transition duration (s)
+   * @default 0.2
    */
   duration?: number
 
   /**
-   * @description Exit transition duration in ms
-   * @default 150
+   * @description Exit transition duration (s)
+   * @default 0.2
    */
   exitDuration?: number
 
@@ -90,13 +90,13 @@ export interface TransitionProps<T extends keyof JSX.IntrinsicElements = 'div'> 
   onEntered?: () => void
 
   /**
-   * @description Delay in ms before enter transition starts (ms)
+   * @description Delay before enter transition starts (s)
    * @default 0
    */
   enterDelay?: number
 
   /**
-   * @description Delay in ms before exit transition starts (ms)
+   * @description Delay before exit transition starts (s)
    * @default 0
    */
   exitDelay?: number
@@ -200,7 +200,7 @@ export const Transition = <T extends keyof JSX.IntrinsicElements>({
     )
   }
 
-  const isExited = transitionStatus === 'exited'
+  const isExited = transitionStatus === TransitionStatus.exited
 
   if (isExited) {
     if (unsafe_alwaysMounted) {

@@ -25,7 +25,7 @@ function Demo({ opened }: { opened: boolean }) {
     <Transition
       mounted={opened}
       transition='fade'
-      duration={400}
+      duration={0.4}
       timingFunction='ease'
     >
       <div>Hello, World!</div>
@@ -73,7 +73,7 @@ function Demo() {
 import { setGlobalConfig } from 'react-transition-preset'
 
 setGlobalConfig({
-  duration: 150,
+  duration: 0.2,
   timingFunction: 'linear',
   transition: 'fade-up'
 })
@@ -118,14 +118,14 @@ interface TransitionProps {
   initial?: boolean
 
   /** 
-   * @description 过渡持续时间（毫秒）
-   * @default 150
+   * @description 过渡持续时间（秒）
+   * @default 0.2
    */
   duration?: number
 
   /**
-   * @description 退出过渡持续时间（毫秒） 
-   * @default 150
+   * @description 退出过渡持续时间（秒） 
+   * @default 0.2
    */
   exitDuration?: number
 
@@ -167,13 +167,13 @@ interface TransitionProps {
   onEntered?: () => void
 
   /** 
-   * @description 进入过渡开始前的延迟时间（毫秒）
+   * @description 进入过渡开始前的延迟时间（秒）
    * @default 0
    */
   enterDelay?: number
 
   /** 
-   * @description 退出过渡开始前的延迟时间（毫秒）
+   * @description 退出过渡开始前的延迟时间（秒）
    * @default 0
    */
   exitDelay?: number

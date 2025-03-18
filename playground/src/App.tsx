@@ -3,7 +3,7 @@ import { type TransitionName } from 'react-transition-preset/types'
 import Demo from './Demo'
 
 setGlobalConfig({
-  duration: 150,
+  duration: 0.2,
 })
 
 function App() {

@@ -1,5 +1,5 @@
 import { type TransitionProps } from './Transition'
-import { mergeOmitUndefined } from './utils'
+import { defaults } from './utils'
 
 type TransitionConfig = Pick<
   TransitionProps,
@@ -16,7 +16,8 @@ type TransitionConfig = Pick<
 
 const defaultConfig: TransitionConfig = {
   transition: 'fade',
-  duration: 150,
+  duration: 0.2,
+  exitDuration: 0.2,
   keepMounted: false,
   enterDelay: 0,
   exitDelay: 0,
@@ -37,7 +38,7 @@ export class GlobalConfig {
   }
 
   static merge(props: TransitionConfig) {
-    const value = mergeOmitUndefined(this.config, props)
+    const value = defaults(this.config, props)
     if (value.exitDuration === undefined) {
       value.exitDuration = value.duration
     }

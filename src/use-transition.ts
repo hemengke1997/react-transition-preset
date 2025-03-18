@@ -1,9 +1,15 @@
 import { useRef, useState } from 'react'
-import { flushSync } from 'react-dom'
 import { useDidUpdate } from './hooks/use-did-update'
 import { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect'
 
-export type TransitionStatus = 'entered' | 'exited' | 'entering' | 'exiting' | 'pre-exiting' | 'pre-entering'
+export enum TransitionStatus {
+  entered = 'entered',
+  exited = 'exited',
+  entering = 'entering',
+  exiting = 'exiting',
+  preExiting = 'pre-exiting',
+  preEntering = 'pre-entering',
+}
 
 export interface UseTransition {
   duration: number
@@ -20,26 +26,39 @@ export interface UseTransition {
   exitDelay?: number
 }
 
-export function useTransition({
-  duration,
-  initial,
-  exitDuration,
-  timingFunction,
-  mounted,
-  reduceMotion,
-  onEnter,
-  onExit,
-  onEntered,
-  onExited,
-  enterDelay,
-  exitDelay,
-}: UseTransition) {
+function secToMs(ms: number | undefined) {
+  return (ms || 0) * 1000
+}
+
+export function useTransition(props: UseTransition) {
+  const {
+    duration: durationInSec,
+    initial,
+    exitDuration: exitDurationInSec,
+    timingFunction,
+    mounted,
+    reduceMotion,
+    onEnter,
+    onExit,
+    onEntered,
+    onExited,
+    enterDelay: enterDelayInSec,
+    exitDelay: exitDelayInSec,
+  } = props
+
+  const [duration, exitDuration, enterDelay, exitDelay] = [
+    durationInSec,
+    exitDurationInSec,
+    enterDelayInSec,
+    exitDelayInSec,
+  ].map(secToMs)
+
   const [transitionDuration, setTransitionDuration] = useState(reduceMotion ? 0 : duration)
   const [transitionStatus, setStatus] = useState<TransitionStatus>(() => {
     if (mounted) {
-      return initial ? 'pre-entering' : 'entered'
+      return initial ? TransitionStatus.preEntering : TransitionStatus.entered
     }
-    return 'exited'
+    return TransitionStatus.exited
   })
   const transitionTimeoutRef = useRef<number>(-1)
   const delayTimeoutRef = useRef<number>(-1)
@@ -58,21 +77,19 @@ export function useTransition({
     if (newTransitionDuration === 0) {
       typeof preHandler === 'function' && preHandler()
       typeof handler === 'function' && handler()
-      setStatus(shouldMount ? 'entered' : 'exited')
+      setStatus(shouldMount ? TransitionStatus.entered : TransitionStatus.exited)
     } else {
       // Make sure new status won't be set within the same frame as this would disrupt animation
       rafRef.current = requestAnimationFrame(() => {
-        flushSync(() => {
-          setStatus(shouldMount ? 'pre-entering' : 'pre-exiting')
-        })
+        setStatus(shouldMount ? TransitionStatus.preEntering : TransitionStatus.preExiting)
 
         rafRef.current = requestAnimationFrame(() => {
           typeof preHandler === 'function' && preHandler()
-          setStatus(shouldMount ? 'entering' : 'exiting')
+          setStatus(shouldMount ? TransitionStatus.entering : TransitionStatus.exiting)
 
           transitionTimeoutRef.current = window.setTimeout(() => {
             typeof handler === 'function' && handler()
-            setStatus(shouldMount ? 'entered' : 'exited')
+            setStatus(shouldMount ? TransitionStatus.entered : TransitionStatus.exited)
           }, newTransitionDuration)
         })
       })
