@@ -28,7 +28,7 @@ export default function Demo(props: Props) {
       <div className={'flex gap-x-4'}>
         {tx.map((item, index) => (
           <div className={'relative h-40 w-40'} key={index}>
-            <Transition transition={transition} mounted={item.mounted} keepMounted={false}>
+            <Transition transition={transition} mounted={item.mounted} keepMounted={false} initial={true}>
               {(style) => {
                 return (
                   <div
