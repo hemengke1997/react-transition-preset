@@ -1,3 +1,12 @@
+## [2.3.1](https://github.com/hemengke1997/react-transition-preset/compare/v2.3.0...v2.3.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* rm sync react-dom render ([b8168e3](https://github.com/hemengke1997/react-transition-preset/commit/b8168e3c714114019bc56c4e2d03f385f0acd941))
+
+
+
 # [2.3.0](https://github.com/hemengke1997/react-transition-preset/compare/v2.2.1...v2.3.0) (2025-03-03)
 
 
