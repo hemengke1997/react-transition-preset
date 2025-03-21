@@ -38,7 +38,7 @@ export class GlobalConfig {
   }
 
   static merge(props: TransitionConfig) {
-    const value = defaults(this.config, props)
+    const value = defaults(props, this.config)
     if (value.exitDuration === undefined) {
       value.exitDuration = value.duration
     }
