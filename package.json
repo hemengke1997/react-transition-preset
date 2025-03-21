@@ -32,14 +32,14 @@
     },
     "./types": {
       "types": "./dist/types.d.ts"
-    },
-    "./*": "./*"
+    }
   },
   "sideEffects": false,
   "scripts": {
     "dev": "rm -rf dist && tsup --watch",
     "build": "rm -rf dist && tsup",
     "build:pages": "npm run build && cd playground && npm run build",
+    "test": "vitest",
     "lint-staged": "tsc --noEmit && lint-staged",
     "commitlint": "commitlint -e",
     "prepare": "simple-git-hooks",
@@ -68,7 +68,9 @@
     "taze": "^18.7.1",
     "tsup": "8.3.0",
     "tsup-plugin-bundleless": "^1.2.1",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.9"
   },
   "simple-git-hooks": {
     "commit-msg": "npm run commitlint",

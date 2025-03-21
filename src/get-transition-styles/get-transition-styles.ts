@@ -1,12 +1,13 @@
 import { presets, type TransitionMode } from '../presets'
+import { TransitionStatus } from '../use-transition'
 
 const transitionStatuses = {
-  'entering': 'in',
-  'entered': 'in',
-  'exiting': 'out',
-  'exited': 'out',
-  'pre-exiting': 'out',
-  'pre-entering': 'out',
+  [TransitionStatus.entering]: 'in',
+  [TransitionStatus.entered]: 'in',
+  [TransitionStatus.exiting]: 'out',
+  [TransitionStatus.exited]: 'out',
+  [TransitionStatus.preEntering]: 'out',
+  [TransitionStatus.preExiting]: 'out',
 } as const
 
 export function getTransitionStyles({

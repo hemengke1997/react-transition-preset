@@ -7,3 +7,7 @@ export function defaults<T extends Record<string, any>>(options: T, defaultOptio
   }
   return result
 }
+
+export function secToMs(ms: number | undefined) {
+  return (ms || 0) * 1000
+}

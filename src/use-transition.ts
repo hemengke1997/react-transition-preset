@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { useDidUpdate } from './hooks/use-did-update'
 import { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect'
 import { useMemoizedFn } from './hooks/use-memoized-fn'
+import { secToMs } from './utils'
 
 export enum TransitionStatus {
   entered = 'entered',
@@ -25,10 +26,6 @@ export interface UseTransition {
   onExited?: () => void
   enterDelay?: number
   exitDelay?: number
-}
-
-function secToMs(ms: number | undefined) {
-  return (ms || 0) * 1000
 }
 
 export function useTransition(props: UseTransition) {
