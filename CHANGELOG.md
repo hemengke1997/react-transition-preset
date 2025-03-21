@@ -1,3 +1,12 @@
+## [3.0.2](https://github.com/hemengke1997/react-transition-preset/compare/v3.0.1...v3.0.2) (2025-03-21)
+
+
+### Bug Fixes
+
+* hook error ([3cf8deb](https://github.com/hemengke1997/react-transition-preset/commit/3cf8deb734f0943a18b4996d5c91f6458224244f))
+
+
+
 ## [3.0.1](https://github.com/hemengke1997/react-transition-preset/compare/v3.0.0...v3.0.1) (2025-03-18)
 
 
