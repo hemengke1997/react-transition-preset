@@ -14,7 +14,7 @@ export function useInView(
   { root, margin, amount = 'some', once = false }: UseInViewOptions = {},
   options: {
     enable?: boolean
-  },
+  } = {},
 ) {
   const [isInView, setInView] = useState(false)
   const { enable } = options

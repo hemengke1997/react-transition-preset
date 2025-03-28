@@ -52,6 +52,7 @@ export function useTransition(props: UseTransition) {
   ].map(secToMs)
 
   const [transitionDuration, setTransitionDuration] = useState(reduceMotion ? 0 : duration)
+
   const [transitionStatus, setStatus] = useState<TransitionStatus>(() => {
     if (mounted) {
       return initial ? TransitionStatus.preEntering : TransitionStatus.entered

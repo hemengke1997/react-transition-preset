@@ -46,7 +46,8 @@
     "lint": "tsc --noEmit && eslint .",
     "up": "taze -I -w -r",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "bump": "bumpp package.json -c --no-push -t --all -x \"npm run changelog\""
+    "bump": "bumpp package.json -c --no-push -t --all -x \"npm run changelog\"",
+    "test:browser": "vitest --workspace=vitest.workspace.ts"
   },
   "peerDependencies": {
     "react": ">=17.0.2"
@@ -57,10 +58,14 @@
     "@minko-fe/eslint-config": "^4.2.1",
     "@minko-fe/prettier-config": "^2.2.5",
     "@minko-fe/tsconfig": "^2.1.1",
+    "@testing-library/react": "^16.2.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "@vitest/ui": "^3.0.9",
     "bumpp": "^10.1.0",
     "conventional-changelog-cli": "^5.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.22.0",
+    "jsdom": "^26.0.0",
     "lint-staged": "^15.5.0",
     "npm-run-all": "^4.1.5",
     "prettier-plugin-tailwindcss": "^0.6.11",
