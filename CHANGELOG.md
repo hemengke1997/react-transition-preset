@@ -1,3 +1,12 @@
+## [3.0.3](https://github.com/hemengke1997/react-transition-preset/compare/v3.0.2...v3.0.3) (2025-04-07)
+
+
+### Bug Fixes
+
+* initial and mouted conflict ([ca4fe4e](https://github.com/hemengke1997/react-transition-preset/commit/ca4fe4ee4dd9bf6fac35d7699b40e5e326080d85))
+
+
+
 ## [3.0.2](https://github.com/hemengke1997/react-transition-preset/compare/v3.0.1...v3.0.2) (2025-03-21)
 
 
