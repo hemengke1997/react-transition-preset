@@ -37,6 +37,7 @@ describe('GlobalConfig', () => {
   it('merge config', () => {
     const config = GlobalConfig.merge({ duration: 50 })
     expect(config).toHaveProperty('duration', 50)
+    expect(GlobalConfig.config).toHaveProperty('duration', 0.2)
   })
 
   it('exitDuration defaults to duration by set', () => {

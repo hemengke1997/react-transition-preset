@@ -118,7 +118,7 @@ export function useTransition(props: UseTransition) {
     },
     {
       deps: [mounted],
-      initialMounted: initial,
+      initialMounted: initial && mounted,
     },
   )
 
