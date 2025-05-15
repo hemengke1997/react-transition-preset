@@ -10,7 +10,7 @@ export interface UseInViewOptions extends Omit<InViewOptions, 'root' | 'amount'>
 }
 
 export function useInView(
-  ref: RefObject<Element>,
+  ref: RefObject<Element | null>,
   { root, margin, amount = 'some', once = false }: UseInViewOptions = {},
   options: {
     enable?: boolean

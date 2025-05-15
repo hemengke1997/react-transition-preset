@@ -62,7 +62,7 @@ export interface TransitionProps<T extends keyof JSX.IntrinsicElements = 'div'> 
   /**
    * @description Render function with transition styles argument
    */
-  children: JSX.Element | ((styles: React.CSSProperties) => JSX.Element)
+  children: React.JSX.Element | ((styles: React.CSSProperties) => React.JSX.Element)
 
   /**
    * @description Determines whether to reduce motion
@@ -166,7 +166,14 @@ export const Transition = <T extends keyof JSX.IntrinsicElements>({
         // Context will be lost when using cloneElement
         // Use as your risk
         if (isValidElement(children)) {
-          element = cloneElement(children as React.ReactElement, { style })
+          element = cloneElement<{
+            style: CSSProperties
+          }>(
+            children as React.ReactElement<{
+              style: CSSProperties
+            }>,
+            { style },
+          )
         } else {
           element = children
         }
