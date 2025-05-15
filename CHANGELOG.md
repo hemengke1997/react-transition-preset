@@ -1,3 +1,12 @@
+# [3.1.0](https://github.com/hemengke1997/react-transition-preset/compare/v3.0.3...v3.1.0) (2025-05-15)
+
+
+### Bug Fixes
+
+* react19 dts ([e138fe6](https://github.com/hemengke1997/react-transition-preset/commit/e138fe6d8f06384bed11af30221078fcac4650f8))
+
+
+
 ## [3.0.3](https://github.com/hemengke1997/react-transition-preset/compare/v3.0.2...v3.0.3) (2025-04-07)
 
 
